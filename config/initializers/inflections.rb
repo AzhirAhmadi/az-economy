@@ -1,3 +1,9 @@
+# frozen_string_literal: true
+
+ActiveSupport::Inflector.inflections do |inflect|
+  inflect.irregular 'data', 'datas' # or whatever you want your plural to be
+end
+
 # Be sure to restart your server when you modify this file.
 
 # Add new inflection rules using the following format. Inflections
