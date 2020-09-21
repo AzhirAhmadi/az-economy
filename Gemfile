@@ -36,8 +36,14 @@ gem 'jbuilder', '~> 2.5'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
 
+# MyGems
 gem 'jsonapi-rails'
-
+gem 'devise'
+gem 'devise-jwt'
+gem 'figaro'
+gem 'pundit'
+gem 'webpacker'
+gem 'carrierwave'
 
 group :development, :test do
   gem 'factory_bot_rails'
@@ -55,6 +61,8 @@ group :development do
 
   # MyGems
   gem 'annotate'
+  gem 'rename'
+  gem 'colorize'
 end
 
 group :test do
