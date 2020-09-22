@@ -40,6 +40,8 @@ class User < ApplicationRecord
   # Scopes
 
   # Others
+  ROLES = %w[admin teacher student]
+
   def add_jti
     self.jti ||= SecureRandom.uuid
   end
@@ -48,5 +50,16 @@ class User < ApplicationRecord
       JWT.encode({ id: id,
                   exp: 5.days.from_now.to_i },
                   Rails.env.devise.jwt.secret_key)
+  end
+  
+  def method_missing(method, *args)
+    name = method.to_s
+    super unless name.start_with?("is_")
+    super unless name.end_with?("?")
+
+    role_name = name.split("_").last.gsub('?', '')
+    super unless ROLES.include? role_name
+
+    role.kind_of? role_name.capitalize.constantize
   end
 end
