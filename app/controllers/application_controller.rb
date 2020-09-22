@@ -43,4 +43,10 @@ class ApplicationController < ActionController::Base
       response: "rescue JWT::DecodeError"
     }
   end
+
+  def render_access_denied
+    render json:  {
+    success: false,
+    response: "Access denied"
+  }
 end
