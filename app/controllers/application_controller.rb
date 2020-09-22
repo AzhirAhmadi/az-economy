@@ -46,7 +46,8 @@ class ApplicationController < ActionController::Base
 
   def render_access_denied
     render json:  {
-    success: false,
-    response: "Access denied"
-  }
+      success: false,
+      response: "Access denied",
+    }
+  end
 end
