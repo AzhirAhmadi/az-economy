@@ -40,15 +40,13 @@ gem 'bootsnap', '>= 1.1.0', require: false
 gem 'jsonapi-rails'
 gem 'devise'
 gem 'devise-jwt'
-gem 'figaro'
 gem 'pundit'
-gem 'webpacker'
-gem 'carrierwave'
 
 group :development, :test do
   gem 'factory_bot_rails'
   gem 'faker'
   gem 'rspec-rails'
+  gem 'pry-byebug'
 end
 
 group :development do
