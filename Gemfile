@@ -41,6 +41,7 @@ gem 'jsonapi-rails'
 gem 'devise'
 gem 'devise-jwt'
 gem 'pundit'
+gem 'figaro'
 
 group :development, :test do
   gem 'factory_bot_rails'
