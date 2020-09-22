@@ -11,9 +11,10 @@ Rails.application.routes.draw do
           delete '/signout',      to: 'sessions#destroy'
         end
       end
-      # namespace :admin do
-      #   resources :users
-      # end
+      namespace :admin do
+        get   '/profile',       to: 'admins#profile'
+        resources :users
+      end
       # namespace :teacher do
       #   resources :users do
       #     resources :environments, only: %i[index show] do
