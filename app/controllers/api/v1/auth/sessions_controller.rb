@@ -10,6 +10,7 @@ module Api::V1::Auth
       render json:  {
         success: true,
         email: current_user.email,
+        role: current_user.role.class.to_s.downcase,
         jwt: 'Bearer '+request.env['warden-jwt_auth.token'],
         response: "Authentication successful"
       }
