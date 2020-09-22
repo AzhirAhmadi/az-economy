@@ -21,12 +21,16 @@
 #  last_sign_in_at        :datetime
 #  current_sign_in_ip     :inet
 #  last_sign_in_ip        :inet
+#  jti                    :string           not null
 #
 class User < ApplicationRecord
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
-  devise :database_authenticatable, :registerable, :recoverable, :rememberable, :validatable, :trackable
+  include Devise::JWT::RevocationStrategies::JTIMatcher
+  devise :database_authenticatable, :registerable, :recoverable,
+  :rememberable, :validatable, :trackable,
+  :jwt_authenticatable, jwt_revocation_strategy: self
+
   # Callbacks
+  before_create :add_jti
 
   # Validations
 
@@ -36,4 +40,13 @@ class User < ApplicationRecord
   # Scopes
 
   # Others
+  def add_jti
+    self.jti ||= SecureRandom.uuid
+  end
+
+  def generate_jwt
+      JWT.encode({ id: id,
+                  exp: 5.days.from_now.to_i },
+                  Rails.env.devise.jwt.secret_key)
+  end
 end
