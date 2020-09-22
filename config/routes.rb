@@ -15,31 +15,13 @@ Rails.application.routes.draw do
         get   '/profile',       to: 'admins#profile'
         resources :users
       end
-      # namespace :teacher do
-      #   resources :users do
-      #     resources :environments, only: %i[index show] do
-      #       resources :field_rent_datas, only: %i[index show]
-      #       resources :loan_datas, only: %i[index show]
-      #       resources :framing_datas, only: %i[index show]
-      #       resources :product_datas, only: %i[index show]
-            
-      #       resources :companies, only: %i[show new create edit update]
-      #     end
-      #   end
-      # end
+      namespace :teacher do
+        get   '/profile',       to: 'teachers#profile'
+      end
     
-      # namespace :student do
-      #   resources :users do
-      #     resources :environments, only: %i[index show] do
-      #       resources :field_rent_datas, only: %i[index show]
-      #       resources :loan_datas, only: %i[index show]
-      #       resources :framing_datas, only: %i[index show]
-      #       resources :product_datas, only: %i[index show]
-    
-      #       resources :companies, only: %i[show new create edit update]
-      #     end
-      #   end
-      # end
+      namespace :student do
+        get   '/profile',       to: 'students#profile'
+      end
     end
   end
 end
