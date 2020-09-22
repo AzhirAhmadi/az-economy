@@ -17,14 +17,16 @@ class ApplicationController < ActionController::Base
 
   def check_authorization_token
     if request.headers["Authorization"].blank?
-      raise ErrorHandling::Errors::JwtToken::Absence.new  params: params
+      render json:  {
+        success: false,
+        response: "check_authorization_token"
+      }
     end
   end
 
   def check_json_format
     unless request.format == :json
       sign_out
-      raise ErrorHandling::Errors::Requset::NonJsonInput.new  params: params
     end
   end
 
@@ -36,6 +38,9 @@ class ApplicationController < ActionController::Base
     JWT.decode(token, secret, true, algorithm: 'HS256',
       verify_jti: true)[0]['jti']
   rescue JWT::DecodeError
-    raise ErrorHandling::Errors::JwtToken::Wrong.new  params: params
+    render json:  {
+      success: false,
+      response: "rescue JWT::DecodeError"
+    }
   end
 end
