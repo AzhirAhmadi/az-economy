@@ -11,7 +11,6 @@ module Api
           render_access_denied unless current_user&.student?
         end
 
-
         def profile
           render json: current_user
         end
