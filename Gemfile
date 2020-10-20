@@ -37,17 +37,20 @@ gem 'jbuilder', '~> 2.5'
 gem 'bootsnap', '>= 1.1.0', require: false
 
 # MyGems
-gem 'jsonapi-rails'
 gem 'devise'
 gem 'devise-jwt'
-gem 'pundit'
 gem 'figaro'
+gem 'jsonapi-rails'
+gem 'pundit'
 
 group :development, :test do
   gem 'factory_bot_rails'
   gem 'faker'
-  gem 'rspec-rails'
   gem 'pry-byebug'
+  gem 'rspec-rails'
+  gem 'rubocop', require: false # Code quality https://github.com/bbatsov/rubocop
+  gem 'rubocop-rails'
+  gem 'rubocop-rspec'
 end
 
 group :development do
@@ -60,8 +63,8 @@ group :development do
 
   # MyGems
   gem 'annotate'
-  gem 'rename'
   gem 'colorize'
+  gem 'rename'
 end
 
 group :test do
