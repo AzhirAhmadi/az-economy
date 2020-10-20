@@ -1,33 +1,39 @@
-module Api::V1::Auth
-  class SessionsController < Devise::SessionsController
-    skip_before_action :verify_signed_out_user
-    skip_before_action :authenticate_user!, only: [:create]
+# frozen_string_literal: true
 
-    def create
-      resource = warden.authenticate(scope: :user)
+module Api
+  module V1
+    module Auth
+      class SessionsController < Devise::SessionsController
+        skip_before_action :verify_signed_out_user
+        skip_before_action :authenticate_user!, only: [:create]
 
-      sign_in(resource_name, resource)
-      render json: {
-        success: true,
-        email: current_user.email,
-        role: current_user.role.class.to_s.downcase,
-        jwt: 'Bearer ' + request.env['warden-jwt_auth.token'],
-        response: 'Authentication successful'
-      }
-    end
+        def create
+          resource = warden.authenticate(scope: :user)
 
-    def destroy
-      user = User.find_by_jti(decode_authorization_token)
+          sign_in(resource_name, resource)
+          render json: {
+            success: true,
+            email: current_user.email,
+            role: current_user.role.class.to_s.downcase,
+            jwt: 'Bearer ' + request.env['warden-jwt_auth.token'],
+            response: 'Authentication successful'
+          }
+        end
 
-      user.update_column(:jti, SecureRandom.uuid)
-      signed_out = (Devise.sign_out_all_scopes ? sign_out : sign_out(resource_name))
-      render json: {
-        message: 'signed out!'
-      }
-    end
+        def destroy
+          user = User.find_by_jti(decode_authorization_token)
 
-    def self.getCurrentUser
-      User.find_by_jti(decode_authorization_token)
+          user.update_column(:jti, SecureRandom.uuid)
+          signed_out = (Devise.sign_out_all_scopes ? sign_out : sign_out(resource_name))
+          render json: {
+            message: 'signed out!'
+          }
+        end
+
+        def self.getCurrentUser
+          User.find_by_jti(decode_authorization_token)
+        end
+      end
     end
   end
 end

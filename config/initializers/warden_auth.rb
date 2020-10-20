@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # config/initializers/warden_auth.rb
 Warden::JWTAuth.configure do |config|
   config.secret = ENV['DEVISE_JWT_SECRET_KEY']
