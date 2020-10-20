@@ -55,41 +55,49 @@ class User < ApplicationRecord
                Rails.env.devise.jwt.secret_key)
   end
 
-  def method_missing(method_name, *args)
-    supported_method?(method_name) || super
-
-    check_role?(method_name)
+  def admin?
+    role_type == "Admin"
   end
 
-  def respond_to?(method_name, include_private = false)
-    supported_method?(method_name) || super
+  def teacher?
+    role_type == "Teacher"
   end
 
-  def respond_to_missing?(method_name, include_private = false)
-    supported_method?(method_name) || super
+  def student?
+    role_type == "Student"
   end
 
-  private
+  # def method_missing(method_name, *args)
+  #   return super unless supported_method?(method_name)
 
-  def supported_method?(method_name)
-    supported_role_checker?(method_name)
-  end
+  #   check_role?(method_name)
+  # end
 
-  def supported_role_checker?(method_name)
-    name = method_name.to_s
-    return false unless name.end_with?('?')
+  # def respond_to_missing?(method_name, include_private = false)
+  #   supported_method?(method_name) || super
+  # end
 
-    role_name = name.delete('?')
-    ROLES.include? role_name
-  end
+  # private
 
-  def check_role?(method_name)
-    name = method_name.to_s
-    return false unless name.end_with?('?')
+  # def supported_method?(method_name)
+  #   supported_role_checker?(method_name)
+  # end
 
-    role_name = name.delete('?')
-    ROLES.include? role_name
+  # def supported_role_checker?(method_name)
+  #   name = method_name.to_s
+  #   return false unless name.end_with?('?')
 
-    role.is_a? role_name.capitalize.constantize
-  end
+  #   role_name = name.delete('?')
+  #   ROLES.include? role_name
+  # end
+
+  # def check_role?(method_name)
+  #   name = method_name.to_s
+  #   return false unless name.end_with?('?')
+
+  #   role_name = name.delete('?')
+  #   return false unless ROLES.include? role_name
+
+  #   role_type == role_name.capitalize
+  # end
 end
