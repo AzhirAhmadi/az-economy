@@ -18,12 +18,11 @@ class ApplicationController < ActionController::Base
   end
 
   def check_authorization_token
-    if request.headers['Authorization'].blank?
-      render json: {
-        success: false,
-        response: 'check_authorization_token'
-      }
-    end
+    return unless request.headers['Authorization'].blank?
+    render json: {
+      success: false,
+      response: 'check_authorization_token'
+    }
   end
 
   def check_json_format
