@@ -26,5 +26,5 @@ class CashAccount < ApplicationRecord
   # Scopes
 
   # Others
-  enum type: %i[income outcome]
+  enum type: %i(income outcome)
 end

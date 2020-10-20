@@ -9,20 +9,20 @@ class ApplicationController < ActionController::Base
   before_action :authenticate_user!, except: [:app]
 
   def authenticate_user!(*_args)
-    check_authorization_token
-    set_current_user
+    return unless check_authorization_token?
+    return unless current_user || User.find_by_jti(decode_authorization_token)
+
+    render_access_denied unless current_user&.admin?
   end
 
-  def set_current_user
-    @current_user ||= User.find_by_jti(decode_authorization_token)
-  end
+  def check_authorization_token?
+    return true unless request.headers['Authorization'].blank?
 
-  def check_authorization_token
-    return unless request.headers['Authorization'].blank?
     render json: {
       success: false,
-      response: 'check_authorization_token'
+      response: 'check_authorization_token',
     }
+    false
   end
 
   def check_json_format
@@ -34,19 +34,18 @@ class ApplicationController < ActionController::Base
 
     token = request.headers['Authorization'].split('Bearer ').last
     secret = ENV['DEVISE_JWT_SECRET_KEY']
-    JWT.decode(token, secret, true, algorithm: 'HS256',
-                                    verify_jti: true)[0]['jti']
+    JWT.decode(token, secret, true, algorithm: 'HS256', verify_jti: true)[0]['jti']
   rescue JWT::DecodeError
     render json: {
       success: false,
-      response: 'rescue JWT::DecodeError'
+      response: 'rescue JWT::DecodeError',
     }
   end
 
   def render_access_denied
     render json: {
       success: false,
-      response: 'Access denied'
+      response: 'Access denied',
     }
   end
 end

@@ -24,5 +24,5 @@ class Enrollment < ApplicationRecord
   # Scopes
 
   # Others
-  enum status: %i[registered accepted rejected]
+  enum status: %i(registered accepted rejected)
 end

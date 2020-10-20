@@ -51,6 +51,8 @@ group :development, :test do
   gem 'pry-byebug'
   gem 'rspec-rails'
   gem 'rubocop', require: false # Code quality https://github.com/bbatsov/rubocop
+  gem 'rubocop-checkstyle_formatter', require: false
+  gem 'rubocop-performance'
   gem 'rubocop-rails'
   gem 'rubocop-rspec'
 end

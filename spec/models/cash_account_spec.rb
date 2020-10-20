@@ -28,5 +28,5 @@ RSpec.describe CashAccount, type: :model do
     it { should belong_to(:company) }
   end
 
-  it { should define_enum_for(:type).with_values(%i[income outcome]) }
+  it { should define_enum_for(:type).with_values(%i(income outcome)) }
 end

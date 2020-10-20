@@ -24,5 +24,5 @@ RSpec.describe Enrollment, type: :model do
     it { should validate_presence_of(:student) }
   end
 
-  it { should define_enum_for(:status).with_values(%i[registered accepted rejected]) }
+  it { should define_enum_for(:status).with_values(%i(registered accepted rejected)) }
 end

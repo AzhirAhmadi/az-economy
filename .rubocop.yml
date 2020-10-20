@@ -1,0 +1,101 @@
+require: rubocop-performance
+
+AllCops:
+  TargetRubyVersion: 2.6
+  Exclude:
+  - 'db/**/*'
+  - 'app/views/**/*'
+  - 'config/**/*'
+  - 'bin/*'
+  - 'node_modules/**/*'
+  - 'spec/rails_helper.rb'
+  - '**/Guardfile'
+  - '**/Rakefile'
+  - 'lib/tasks/**/*'
+  - '**/*.gemspec'
+  - '**/Gemfile'
+  - '**/i18n/**/*'
+  - 'vendor/**/*'
+
+Bundler/OrderedGems:
+  Enabled: false
+
+Layout/MultilineMethodCallIndentation:
+  Enabled: true
+  EnforcedStyle: indented
+
+Style/FrozenStringLiteralComment:
+  Enabled: true
+
+Style/PercentLiteralDelimiters:
+  PreferredDelimiters:
+    '%i': '()'
+    '%w': '()'
+
+Style/TrailingCommaInArrayLiteral:
+  Enabled: true
+  EnforcedStyleForMultiline: comma
+
+Style/TrailingCommaInHashLiteral:
+  Enabled: true
+  EnforcedStyleForMultiline: comma
+
+Style/TrailingCommaInArguments:
+  Enabled: true
+  EnforcedStyleForMultiline: comma
+
+Layout/EmptyLines:
+  Enabled: true
+
+Metrics/ParameterLists:
+  Enabled: false
+
+FrozenStringLiteralComment:
+  Enabled: false
+
+Documentation:
+  Enabled: false
+
+Style/EmptyCaseCondition:
+  Enabled: false
+
+Layout/CaseIndentation:
+  Enabled: false
+
+Metrics/LineLength:
+  Enabled: false
+  Max: 150
+
+Metrics/BlockLength:
+  Enabled: false
+
+Metrics/ClassLength:
+  Enabled: false
+
+Metrics/ModuleLength:
+  Enabled: false
+
+Style/StringLiterals:
+  Enabled: false
+
+Style/ClassAndModuleChildren:
+  Enabled: false
+
+Metrics/AbcSize:
+  Max: 70
+  Enabled: false
+
+Metrics/MethodLength:
+  Max: 20
+  Enabled: false
+
+Metrics/CyclomaticComplexity:
+  Max: 15
+  Enabled: false
+
+Metrics/PerceivedComplexity:
+  Max: 15
+  Enabled: false
+
+Lint/RequireParentheses:
+  Enabled: true

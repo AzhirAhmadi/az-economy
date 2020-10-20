@@ -4,13 +4,16 @@ module Api
   module V1
     module Student
       class StudentsController < ApplicationController
-        def set_current_user
-          @current_user ||= User.find_by_jti(decode_authorization_token)
-          render_access_denied unless @current_user.student?
+        def authenticate_user!(*_args)
+          return unless check_authorization_token?
+          return unless current_user || User.find_by_jti(decode_authorization_token)
+
+          render_access_denied unless current_user&.student?
         end
 
+
         def profile
-          render json: @current_user
+          render json: current_user
         end
       end
     end

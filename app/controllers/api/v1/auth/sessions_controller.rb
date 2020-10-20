@@ -11,12 +11,13 @@ module Api
           resource = warden.authenticate(scope: :user)
 
           sign_in(resource_name, resource)
+
           render json: {
             success: true,
             email: current_user.email,
             role: current_user.role.class.to_s.downcase,
             jwt: 'Bearer ' + request.env['warden-jwt_auth.token'],
-            response: 'Authentication successful'
+            response: 'Authentication successful',
           }
         end
 
@@ -24,13 +25,13 @@ module Api
           user = User.find_by_jti(decode_authorization_token)
 
           user.update_column(:jti, SecureRandom.uuid)
-          signed_out = (Devise.sign_out_all_scopes ? sign_out : sign_out(resource_name))
+
           render json: {
-            message: 'signed out!'
+            message: 'signed out!',
           }
         end
 
-        def self.getCurrentUser
+        def self.current_user
           User.find_by_jti(decode_authorization_token)
         end
       end

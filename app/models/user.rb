@@ -43,7 +43,7 @@ class User < ApplicationRecord
   scope :students, -> { where(role_type: :Student) }
 
   # Others
-  ROLES = %w[admin teacher student].freeze
+  ROLES = %w(admin teacher student).freeze
 
   def add_jti
     self.jti ||= SecureRandom.uuid
@@ -79,7 +79,7 @@ class User < ApplicationRecord
     name = method_name.to_s
     return false unless name.end_with?('?')
 
-    role_name = name.gsub('?', '')
+    role_name = name.delete('?')
     ROLES.include? role_name
   end
 
@@ -87,7 +87,7 @@ class User < ApplicationRecord
     name = method_name.to_s
     return false unless name.end_with?('?')
 
-    role_name = name.gsub('?', '')
+    role_name = name.delete('?')
     ROLES.include? role_name
 
     role.is_a? role_name.capitalize.constantize
