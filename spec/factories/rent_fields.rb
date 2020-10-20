@@ -14,6 +14,5 @@
 #
 FactoryBot.define do
   factory :rent_field do
-    
   end
 end

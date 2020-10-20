@@ -13,6 +13,5 @@
 #
 FactoryBot.define do
   factory :loan_data do
-    
   end
 end

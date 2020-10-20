@@ -14,6 +14,5 @@
 #
 FactoryBot.define do
   factory :field_plenting do
-    
   end
 end

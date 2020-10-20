@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
 
   before_action :authenticate_user!, except: [:app]
 
-  def authenticate_user!(*args)
+  def authenticate_user!(*_args)
     check_authorization_token
     set_current_user
   end
@@ -16,38 +16,36 @@ class ApplicationController < ActionController::Base
   end
 
   def check_authorization_token
-    if request.headers["Authorization"].blank?
-      render json:  {
+    if request.headers['Authorization'].blank?
+      render json: {
         success: false,
-        response: "check_authorization_token"
+        response: 'check_authorization_token'
       }
     end
   end
 
   def check_json_format
-    unless request.format == :json
-      sign_out
-    end
+    sign_out unless request.format == :json
   end
 
   def decode_authorization_token
-    return nil if request.headers["Authorization"].blank?
-    
-    token = request.headers["Authorization"].split('Bearer ').last
+    return nil if request.headers['Authorization'].blank?
+
+    token = request.headers['Authorization'].split('Bearer ').last
     secret = ENV['DEVISE_JWT_SECRET_KEY']
     JWT.decode(token, secret, true, algorithm: 'HS256',
-      verify_jti: true)[0]['jti']
+                                    verify_jti: true)[0]['jti']
   rescue JWT::DecodeError
-    render json:  {
+    render json: {
       success: false,
-      response: "rescue JWT::DecodeError"
+      response: 'rescue JWT::DecodeError'
     }
   end
 
   def render_access_denied
-    render json:  {
+    render json: {
       success: false,
-      response: "Access denied",
+      response: 'Access denied'
     }
   end
 end

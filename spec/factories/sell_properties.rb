@@ -10,6 +10,5 @@
 #
 FactoryBot.define do
   factory :sell_property do
-    
   end
 end

@@ -10,6 +10,5 @@
 #
 FactoryBot.define do
   factory :pay_loan do
-    
   end
 end

@@ -14,6 +14,5 @@
 #
 FactoryBot.define do
   factory :framing_data do
-    
   end
 end

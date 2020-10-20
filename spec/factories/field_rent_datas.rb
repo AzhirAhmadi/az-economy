@@ -13,6 +13,5 @@
 #
 FactoryBot.define do
   factory :field_rent_data do
-    
   end
 end

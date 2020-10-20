@@ -12,6 +12,5 @@
 #
 FactoryBot.define do
   factory :product_data do
-    
   end
 end

@@ -11,6 +11,5 @@
 #
 FactoryBot.define do
   factory :farm_product do
-    
   end
 end
