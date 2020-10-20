@@ -55,13 +55,40 @@ class User < ApplicationRecord
                Rails.env.devise.jwt.secret_key)
   end
 
-  def method_missing(method, *args)
-    name = method.to_s
-    super unless name.start_with?('is_')
-    super unless name.end_with?('?')
+  def method_missing(method_name, *args)
+    supported_method?(method_name) || super
 
-    role_name = name.split('_').last.gsub('?', '')
-    super unless ROLES.include? role_name
+    check_role?(method_name)
+  end
+
+  def respond_to?(method_name, include_private = false)
+    supported_method?(method_name) || super
+  end
+
+  def respond_to_missing?(method_name, include_private = false)
+    supported_method?(method_name) || super
+  end
+
+  private
+
+  def supported_method?(method_name)
+    supported_role_checker?(method_name)
+  end
+
+  def supported_role_checker?(method_name)
+    name = method_name.to_s
+    return false unless name.end_with?('?')
+
+    role_name = name.gsub('?', '')
+    ROLES.include? role_name
+  end
+
+  def check_role?(method_name)
+    name = method_name.to_s
+    return false unless name.end_with?('?')
+
+    role_name = name.gsub('?', '')
+    ROLES.include? role_name
 
     role.is_a? role_name.capitalize.constantize
   end
