@@ -2,7 +2,7 @@
 
 Rails.application.routes.draw do
   devise_for :users, skip: :all
-  
+
   namespace :api, defaults: { format: :json } do
     namespace :v1 do
       devise_scope :user do
@@ -12,13 +12,13 @@ Rails.application.routes.draw do
         end
       end
       namespace :admin do
-        get   '/profile',       to: 'admins#profile'
-        resources :users
+        get '/profile', to: 'admins#profile'
+        resources :users, only: %i[index create]
       end
       namespace :teacher do
         get   '/profile',       to: 'teachers#profile'
       end
-    
+
       namespace :student do
         get   '/profile',       to: 'students#profile'
       end
