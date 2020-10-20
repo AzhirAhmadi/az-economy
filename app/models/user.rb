@@ -38,6 +38,9 @@ class User < ApplicationRecord
   belongs_to :role, polymorphic: true
 
   # Scopes
+  scope :admins, -> { where(role_type: :Admin) }
+  scope :teachers, -> { where(role_type: :Teacher) }
+  scope :students, -> { where(role_type: :Student) }
 
   # Others
   ROLES = %w[admin teacher student]
