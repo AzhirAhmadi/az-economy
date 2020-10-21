@@ -35,6 +35,11 @@ rescue ActiveRecord::PendingMigrationError => e
   exit 1
 end
 RSpec.configure do |config|
+  #my configs
+  config.include FactoryBot::Syntax::Methods
+  config.include JsonApiHelpers
+  config.include DeviseHelper
+
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
 
