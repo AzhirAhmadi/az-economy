@@ -2,10 +2,10 @@ require 'rails_helper'
 
 RSpec.describe Api::V1::Admin::UsersController, type: :request do
   let(:headers) { { "Authorization": token } }
-  let(:user) { create(:admin_user) }
+  let(:signed_in_user) { create(:admin_user) }
 
   before(:each) do
-    sign_in user
+    sign_in signed_in_user
   end
 
   describe 'GET #index' do
