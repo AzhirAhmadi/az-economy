@@ -11,5 +11,6 @@
 #
 FactoryBot.define do
   factory :student do
+    student_number {'1234567890'}
   end
 end

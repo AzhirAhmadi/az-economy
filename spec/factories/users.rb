@@ -24,6 +24,27 @@
 #  jti                    :string           not null
 #
 FactoryBot.define do
-  factory :user do
+  factory :admin_user, class: User do
+    sequence(:email) { |n| "test#{n}@admin.com" }
+    first_name { "first_name" }
+    last_name { "flast_name" }
+    role {create(:admin)}
+    password { "123456" }
+  end
+
+  factory :teacher_user, class: User do
+    sequence(:email) { |n| "test#{n}@teacher.com" }
+    first_name { "first_name" }
+    last_name { "flast_name" }
+    role {create(:teacher)}
+    password { "123456" }
+  end
+
+  factory :student_user, class: User do
+    sequence(:email) { |n| "test#{n}@student.com" }
+    first_name { "first_name" }
+    last_name { "flast_name" }
+    role {create(:student)}
+    password { "123456" }
   end
 end
