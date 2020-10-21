@@ -13,7 +13,7 @@ Rails.application.routes.draw do
       end
       namespace :admin do
         get '/profile', to: 'admins#profile'
-        resources :users, only: %i[index create update]
+        resources :users, only: %i[index show create update destroy]
       end
       namespace :teacher do
         get   '/profile',       to: 'teachers#profile'
