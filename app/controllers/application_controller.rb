@@ -7,6 +7,12 @@ class ApplicationController < ActionController::Base
   skip_before_action :verify_authenticity_token
 
   before_action :authenticate_user!, except: [:app]
+  rescue_from StandardError, with: :error_render_method
+
+  def error_render_method(error)
+    render jsonapi_errors: { title: error.class.to_s,
+                             detail: error.message.to_s }, status: :forbidden
+  end
 
   def authenticate_user!(*_args)
     return unless check_authorization_token?
@@ -21,7 +27,7 @@ class ApplicationController < ActionController::Base
     render json: {
       success: false,
       response: 'check_authorization_token',
-    }
+    }, status: :forbidden
     false
   end
 
@@ -39,13 +45,13 @@ class ApplicationController < ActionController::Base
     render json: {
       success: false,
       response: 'rescue JWT::DecodeError',
-    }
+    }, status: :forbidden
   end
 
   def render_access_denied
     render json: {
       success: false,
       response: 'Access denied',
-    }
+    }, status: :forbidden
   end
 end
