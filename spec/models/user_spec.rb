@@ -26,6 +26,16 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
+  describe 'validations' do
+    it 'should check emali uniqueness' do
+      create(:admin_user, email: 'email@addresse.foo')
+      should_not allow_value("email@addresse.foo").for(:email)
+    end
+
+    it { should allow_value("email@addresse.foo").for(:email) }
+    it { should_not allow_value("invalid_email_format").for(:email) }
+  end
+
   describe 'associations' do
     it { should belong_to(:role) }
   end

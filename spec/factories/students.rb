@@ -11,6 +11,6 @@
 #
 FactoryBot.define do
   factory :student do
-    student_number {'1234567890'}
+    sequence(:student_number) { |n| "#{Faker::Number.within(range: 1000..9999)}-#{n}" }
   end
 end

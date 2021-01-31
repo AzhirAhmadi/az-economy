@@ -13,7 +13,7 @@ class Student < ApplicationRecord
   # Callbacks
 
   # Validations
-  validates :student_number, presence: true
+  validates :student_number, presence: true, uniqueness: true
 
   # Relations
   has_one :account, as: :role, class_name: 'User'
