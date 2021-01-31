@@ -29,9 +29,9 @@ module Api::V1::Admin
     end
 
     def create
-      user = User.new(permited_params.merge(role: role))
+      user = User.create(permited_params.merge(role: role))
 
-      if user.save
+      if user.errors.messages.empty?
         render jsonapi: user,
                class: {
                  Admin: ::Api::V1::Admin::SerializableAdmin,
@@ -80,8 +80,6 @@ module Api::V1::Admin
         ::Teacher.create
       when "Student"
         ::Student.create(student_number: permited_params[:role][:student_number])
-      else
-        raise "Wrong role name #{permited_params[:role][:name]}. Roles are: Admin, Teacher, Student"
       end
     end
 
