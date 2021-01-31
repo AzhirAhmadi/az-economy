@@ -28,7 +28,7 @@ FactoryBot.define do
     sequence(:email) { |n| "test#{n}@admin.com" }
     first_name { "first_name" }
     last_name { "flast_name" }
-    role {create(:admin)}
+    role { create(:admin) }
     password { "123456" }
   end
 
@@ -36,7 +36,7 @@ FactoryBot.define do
     sequence(:email) { |n| "test#{n}@teacher.com" }
     first_name { "first_name" }
     last_name { "flast_name" }
-    role {create(:teacher)}
+    role { create(:teacher) }
     password { "123456" }
   end
 
@@ -44,7 +44,7 @@ FactoryBot.define do
     sequence(:email) { |n| "test#{n}@student.com" }
     first_name { "first_name" }
     last_name { "flast_name" }
-    role {create(:student)}
+    role { create(:student) }
     password { "123456" }
   end
 end

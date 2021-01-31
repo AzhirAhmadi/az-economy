@@ -15,10 +15,7 @@ class ApplicationController < ActionController::Base
   end
 
   def authenticate_user!(*_args)
-    return unless check_authorization_token?
-    return unless current_user || User.find_by_jti(decode_authorization_token)
-
-    render_access_denied unless current_user&.admin?
+    render_access_denied
   end
 
   def check_authorization_token?

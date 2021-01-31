@@ -66,38 +66,4 @@ class User < ApplicationRecord
   def student?
     role_type == "Student"
   end
-
-  # def method_missing(method_name, *args)
-  #   return super unless supported_method?(method_name)
-
-  #   check_role?(method_name)
-  # end
-
-  # def respond_to_missing?(method_name, include_private = false)
-  #   supported_method?(method_name) || super
-  # end
-
-  # private
-
-  # def supported_method?(method_name)
-  #   supported_role_checker?(method_name)
-  # end
-
-  # def supported_role_checker?(method_name)
-  #   name = method_name.to_s
-  #   return false unless name.end_with?('?')
-
-  #   role_name = name.delete('?')
-  #   ROLES.include? role_name
-  # end
-
-  # def check_role?(method_name)
-  #   name = method_name.to_s
-  #   return false unless name.end_with?('?')
-
-  #   role_name = name.delete('?')
-  #   return false unless ROLES.include? role_name
-
-  #   role_type == role_name.capitalize
-  # end
 end
