@@ -30,10 +30,6 @@ module Api
             message: 'signed out!',
           }
         end
-
-        def self.current_user
-          User.find_by_jti(decode_authorization_token)
-        end
       end
     end
   end
